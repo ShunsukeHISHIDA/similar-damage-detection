@@ -1,0 +1,11 @@
+id,area,point,image,status,content,damage_rank
+aokk-0221,東京,柱,a.png,1,"柱にクラックあり
+前回は確認されていない。",A
+kkki-9012,神奈川,梁,a.jpg,2,梁接合部付近に錆汁あり,B
+aokk-0221,東京,柱,a.JPG,3,"柱　クラック
+前回は未確認",B
+fgji-1356,東京都,橋脚,b_1.png,5,鉄筋露出あり,B
+llpo-2988,千葉県,床板,a_2.png,1,ひび散見される,A
+aokk-0221,東京,柱,b_2.png,2,柱　クラック　前回未確認,C
+dtui-2322,神奈川県,柱頭,a_sss.png,1,柱　クラック,A
+tuit-5676,神奈川,柱,example.png,1,柱、クラック,A
