@@ -1,0 +1,10 @@
+# 読み込む csv の属性値計算時の重み
+# 重みの合計値が 100 になるように設定
+
+id: 20
+area: 35
+point: 30
+image: 5
+status: 0
+content: 5
+damage_rank: 5
