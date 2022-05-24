@@ -7,7 +7,6 @@
 """
 import os
 
-import numpy as np
 import pandas as pd
 
 from Calculator.Score import TotalScore
@@ -15,15 +14,20 @@ from Utility.Checker import checkAttribute
 
 
 def main(
-    targetData: pd.DataFrame, correctData: pd.DataFrame, threshold: int, outputPath: str
+    targetData: pd.DataFrame,
+    correctData: pd.DataFrame,
+    threshold: int,
+    outputDir: str,
+    outputFileName: str,
 ):
     """
     @brief メイン関数
-    @param targetData   類似検索をかけるテーブルデータ
-    @param correctData  対象データ（このデータの類似データを検索する）
-    @param threshold    抽出するスコアの閾値
-                        閾値以上のデータを抽出する
-    @param outputPath   抽出したデータの出力先
+    @param targetData       類似検索をかけるテーブルデータ
+    @param correctData      対象データ（このデータの類似データを検索する）
+    @param threshold        抽出するスコアの閾値
+                            閾値以上のデータを抽出する
+    @param outputDir        抽出したデータの出力ディレクトリ
+    @param outputFileName   出力するファイル名
     """
     extractingIndexList = []
     for index, data in targetData.iterrows():
@@ -32,16 +36,19 @@ def main(
         if score.totalScore >= threshold:
             extractingIndexList.append(index)
     extractedData = targetData.loc[extractingIndexList]
+    os.makedirs(outputDir, exist_ok=True)
+    extractedData.to_csv(os.path.join(outputDir, outputFileName))
 
 
 if __name__ == "__main__":
     ### 設定 ###
     targetDataPath = "./Example/DamageList.csv"
     correctDataPath = "./Example/DamageList.csv"
-    outputPath = "./Output/SimilarDamageList.csv"
+    outputDir = "./Output"
+    outputFileName = "ExtractedDamageList.csv"
     scoreThreshold = 90  # 0 <= scoreThreshold <= 100 の範囲で選択
     ############
     targetData = pd.read_csv(targetDataPath)
     correctData = pd.read_csv(correctDataPath)
     checkAttribute(targetData, correctData)
-    main(targetData, correctData, scoreThreshold, outputPath)
+    main(targetData, correctData, scoreThreshold, outputDir, outputFileName)

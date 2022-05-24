@@ -42,7 +42,6 @@ class UnitScore(object):
         tmpScore = 100 * commonWordNum / len(correct)
         # weightは 0 から 100 の値なので、100を割った値をtempScoreに掛ける
         self.__compositionScore = int((weight / 100) * tmpScore)
-        # print("compositionScore: ", self.__compositionScore)
 
     def __calculateOrderScore(self, target, correct, weight):
         """
@@ -58,7 +57,6 @@ class UnitScore(object):
         tmpScore = 100 * commonWordNum / len(correct)
         # weightは 0 から 100 の値なので、100を割った値をtempScoreに掛ける
         self.__orderScore = int((weight / 100) * tmpScore)
-        # print("orderScore: ", self.__orderScore)
 
     def countCommonWordNumber(self, target: list, correct: list) -> int:
         """
@@ -73,6 +71,9 @@ class UnitScore(object):
         return commonWordNum
 
     def countWord(self, wordList) -> dict:
+        """
+        @brief 文字列の構成文字ごとの数をカウントする
+        """
         counter = defaultdict(int)
         for word in wordList:
             counter[word] += 1
@@ -105,11 +106,8 @@ class TotalScore(object):
         """
         scoreList = []
         for attrName, weightValue in weights.items():
-            # print("target: ", targetData[attrName])
-            # print("correct: ", correctData.at[0, attrName])
             target = str(targetData[attrName])
             correct = str(correctData.at[0, attrName])
             unitScore = UnitScore(list(target), list(correct))
-            # print("unitScore: ", unitScore.score)
             scoreList.append(int(weightValue / 100 * unitScore.score))
         self.__totalScore = sum(scoreList)
